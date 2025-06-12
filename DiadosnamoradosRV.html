@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História - 2018 a 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0.9) 12.5%,
+                rgba(231, 255, 243, 0.8) 25%,
+                rgba(207, 255, 233, 0.7) 37.5%,
+                rgba(183, 255, 223, 0.6) 50%,
+                rgba(159, 255, 213, 0.5) 62.5%,
+                rgba(143, 255, 212, 0.4) 75%,
+                rgba(135, 255, 212, 0.3) 87.5%,
+                rgba(127, 255, 212, 0.2) 100%
+            );
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #2d5a4d;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                rgba(45, 90, 77, 0.3) 0%,
+                rgba(45, 90, 77, 0.5) 50%,
+                rgba(127, 255, 212, 0.8) 100%
+            );
+            transform: translateX(-50%);
+        }
+
+        .year-section {
+            margin-bottom: 80px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .year-section:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        .year-section:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .year-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2d5a4d;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .year-title::before,
+        .year-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 60px;
+            height: 2px;
+            background: #2d5a4d;
+        }
+
+        .year-title::before {
+            left: -80px;
+        }
+
+        .year-title::after {
+            right: -80px;
+        }
+
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .photo-placeholder {
+            width: 350px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .photo-placeholder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .photo-description {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .photo-description:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .photo-description textarea {
+            width: 100%;
+            border: none;
+            background: transparent;
+            resize: vertical;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            text-align: center;
+            min-height: 60px;
+            outline: none;
+            color: #555;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            width: 16px;
+            height: 16px;
+            background: #2d5a4d;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px rgba(127, 255, 212, 0.5);
+            z-index: 10;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #2d5a4d;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .year-title {
+                font-size: 2rem;
+            }
+            
+            .year-title::before,
+            .year-title::after {
+                display: none;
+            }
+            
+            .photo-placeholder {
+                width: 280px;
+                height: 240px;
+            }
+            
+            .timeline::before {
+                display: none;
+            }
+            
+            .timeline-dot {
+                display: none;
+            }
+        }
+
+        .instructions {
+            background: rgba(127, 255, 212, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #2d5a4d;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(127, 255, 212, 0.3);
+        }
+
+        .data-controls {
+            background: rgba(127, 255, 212, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(127, 255, 212, 0.3);
+        }
+
+        .data-controls button {
+            background: rgba(127, 255, 212, 0.8);
+            color: #2d5a4d;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .data-controls button:hover {
+            background: rgba(127, 255, 212, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .data-controls button.danger {
+            background: rgba(255, 127, 127, 0.8);
+            color: #5a2d2d;
+        }
+
+        .data-controls button.danger:hover {
+            background: rgba(255, 127, 127, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nois Mozão</h1>
+            <p>Alguns momentos da nossa história...</p>
+        </div>
+        
+        <!--<div class="instructions">
+            💡 Clique nas áreas de texto para adicionar suas memórias especiais de cada ano
+            <br>✨ Suas fotos e textos são salvos automaticamente no navegador
+        </div>-->
+
+        <div class="data-controls">
+            <h3 style="margin-bottom: 15px; color: #2d5a4d;">Gerenciar Dados</h3>
+            <button onclick="exportData()">📥 Exportar Backup</button>
+            <button onclick="importData()">📤 Importar Backup</button>
+            <button onclick="clearData()" class="danger">🗑️ Limpar Tudo</button>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+        </div>
+
+        <div class="timeline">
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2018</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2018<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2018..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2019</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2019<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2019..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2020</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2020<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2020..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2021</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2021<br>
+                            <small style="color: #999; margin-top: 10px; display: small;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2021..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2022</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2022<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2022..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2023</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2023<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2023..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2024</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2024<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2024..."></textarea>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="timeline-dot"></div>
+                <div class="year-title">2025</div>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div>
+                            📸<br>
+                            Adicione sua foto de 2025<br>
+                            <small style="color: #999; margin-top: 10px; display: block;">
+                                Clique para fazer upload ou arraste a imagem aqui
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-description">
+                    <textarea placeholder="Escreva aqui uma memória especial de 2025..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            ❤️ Te amo meu amor e que esses anos sejam apenas uma fração da nosssa história ❤️ <br>
+                Obs: tem uma foto que está no ano errado, descubra e ganhe VALES ESPECIAIS
+        </div>
+    </div>
+
+    <script>
+        // Funcionalidade para upload de imagens
+        document.querySelectorAll('.photo-placeholder').forEach((placeholder, index) => {
+            // Carregar foto salva
+            const savedPhoto = localStorage.getItem(`photo_${index}`);
+            if (savedPhoto) {
+                placeholder.innerHTML = `<img src="${savedPhoto}" alt="Foto">`;
+            }
+
+            placeholder.addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const imageData = e.target.result;
+                            placeholder.innerHTML = `<img src="${imageData}" alt="Foto">`;
+                            // Salvar a imagem no localStorage
+                            localStorage.setItem(`photo_${index}`, imageData);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+                input.click();
+            });
+
+            // Drag and drop functionality
+            placeholder.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                placeholder.style.border = '2px dashed #2d5a4d';
+                placeholder.style.background = 'rgba(127, 255, 212, 0.2)';
+            });
+
+            placeholder.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                placeholder.style.border = '1px solid rgba(255,255,255,0.3)';
+                placeholder.style.background = 'rgba(255, 255, 255, 0.95)';
+            });
+
+            placeholder.addEventListener('drop', function(e) {
+                e.preventDefault();
+                placeholder.style.border = '1px solid rgba(255,255,255,0.3)';
+                placeholder.style.background = 'rgba(255, 255, 255, 0.95)';
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageData = e.target.result;
+                        placeholder.innerHTML = `<img src="${imageData}" alt="Foto">`;
+                        // Salvar a imagem no localStorage
+                        localStorage.setItem(`photo_${index}`, imageData);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Salvar textos automaticamente no localStorage
+        document.querySelectorAll('textarea').forEach((textarea, index) => {
+            // Carregar texto salvo
+            const savedText = localStorage.getItem(`memory_${index}`);
+            if (savedText) {
+                textarea.value = savedText;
+            }
+
+            // Salvar texto ao digitar
+            textarea.addEventListener('input', function() {
+                localStorage.setItem(`memory_${index}`, this.value);
+            });
+        });
+
+        // Animação suave ao rolar
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.year-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Funções para gerenciar dados
+        function exportData() {
+            const data = {
+                photos: {},
+                texts: {},
+                exportDate: new Date().toISOString()
+            };
+
+            // Coletar todas as fotos
+            for (let i = 0; i < 8; i++) {
+                const photo = localStorage.getItem(`photo_${i}`);
+                if (photo) {
+                    data.photos[i] = photo;
+                }
+            }
+
+            // Coletar todos os textos
+            for (let i = 0; i < 8; i++) {
+                const text = localStorage.getItem(`memory_${i}`);
+                if (text) {
+                    data.texts[i] = text;
+                }
+            }
+
+            // Criar arquivo para download
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `nossa-historia-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            alert('✅ Backup exportado com sucesso!');
+        }
+
+        function importData() {
+            document.getElementById('importFile').click();
+        }
+
+        function clearData() {
+            if (confirm('⚠️ Tem certeza que deseja apagar todas as fotos e textos? Esta ação não pode ser desfeita!')) {
+                // Limpar localStorage
+                for (let i = 0; i < 8; i++) {
+                    localStorage.removeItem(`photo_${i}`);
+                    localStorage.removeItem(`memory_${i}`);
+                }
+
+                // Recarregar página para resetar interface
+                location.reload();
+            }
+        }
+
+        // Configurar importação de arquivo
+        document.getElementById('importFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        
+                        // Restaurar fotos
+                        if (data.photos) {
+                            Object.keys(data.photos).forEach(index => {
+                                localStorage.setItem(`photo_${index}`, data.photos[index]);
+                            });
+                        }
+
+                        // Restaurar textos
+                        if (data.texts) {
+                            Object.keys(data.texts).forEach(index => {
+                                localStorage.setItem(`memory_${index}`, data.texts[index]);
+                            });
+                        }
+
+                        alert('✅ Backup importado com sucesso! A página será recarregada.');
+                        location.reload();
+                    } catch (error) {
+                        alert('❌ Erro ao importar backup. Verifique se o arquivo está correto.');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script>
+</body>
+</html>
